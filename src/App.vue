@@ -1,37 +1,12 @@
-<script setup>
-  import TestProps from '../src/components/TestProps.vue'
-  import { ref,reactive, onMounted} from 'vue'
-  const name = ref('')
-  const data = ref([]) ;
- 
-  const increment = ()=>{
-    age.value += 1
-  }
-  const handleChange = (e)=>{
-    name.value = e.target.value
-  }
-  const fetchingData = async ()=>{
-  const response = await fetch('https://jsonplaceholder.typicode.com/users')
-   const json = await response.json()
-   data.value = json;
-  }
-  onMounted(()=>{
-    fetchingData();
-  })
-  
-const filteredData =()=>{
- return data.value.filter((value)=> value.username.toLowerCase().indexOf(name.value))
-}
-  
-</script>
-
 <template>
- 
- <input v-model= 'name' @change="handleChange">
- <div v-for="(data,index) in filteredData" :key="index">
-<h1>{{data.username}}</h1>
-</div>
- <TestProps :data-api="data"/>
+  <router-view>
+    <Navbar/>
+  </router-view>
 </template>
-
-
+<script>
+import Navbar from "./components/Navbar.vue";
+export default {
+    name: "App",
+    components: { Navbar }
+}
+</script>
