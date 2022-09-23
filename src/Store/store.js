@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createStore } from 'vuex';
 
  const store = createStore({
@@ -5,6 +6,7 @@ import { createStore } from 'vuex';
         count: 0,
         dataApi:[],
         user:[],
+        cart:[],
     },
     getters:{},
     mutations:{
@@ -16,8 +18,25 @@ import { createStore } from 'vuex';
         },
         SET_USER({user},payload){
           user.push(payload);
+        },
+        NOT_SAME_DATA (state,payload){
+            const filtered = state.cart.some((data)=>data.id ===payload.id)
+            if(filtered){
+                state.cart.map((data)=>{
+                    data.id === filtered.id
+                })
+                 return{
+                    ...cart,qty : qty +=1
+                 }
+                 
+            }
         }
+
     },
-        actions:{}
+        actions:{
+            async getDataUser (){
+               const response = await axios.get()
+            }
+        }
 });
 export default store;
