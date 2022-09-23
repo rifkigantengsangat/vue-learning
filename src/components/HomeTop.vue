@@ -1,29 +1,24 @@
 <template>
     <div>
-        <div v-if="!loading">
-            <div v-for="(datas,index) in data" :key="index">
-                {{datas.username}}
-                <div>
-
-                    <router-link :to="'/'+datas.id">test</router-link>
-                </div>
-            </div>
-            
-        </div>
-        <div v-if="loading">
-        <h1>Loadinggggggggg</h1>
-        </div>
+     {{state}}
         
     </div>
 </template>
 <script>
     import  getData from '../usebility/getData'
+    import { onMounted, toRefs } from 'vue';
 export default {
+  props:{
+    state : Number, 
+   
+  },
     name: "homeTop",
-    setup() {
+   setup(props) {
+        
+        const {state} = props;
         const {data,loading,error,fetchingData}= getData();
-        fetchingData();
-        return {data,loading,error,fetchingData}
+       fetchingData()
+        return {data,loading,error,fetchingData,state}
 
     }
     

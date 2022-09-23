@@ -1,14 +1,17 @@
 import axios from "axios";
-import { ref } from "vue"
+import { ref,computed } from "vue"
+import { useStore } from "vuex";
 const getData=()=>{
 const data = ref([]);
+const store = useStore();
+
 const loading=ref(false);
 const error = ref(false);
 const fetchingData = async()=>{
     try {
         loading.value=true;
         const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-        data.value=response.data;
+        store.commit("PUSH_DATA",response.data);
     } catch (error) {
         console.log(error.message);
     }finally{

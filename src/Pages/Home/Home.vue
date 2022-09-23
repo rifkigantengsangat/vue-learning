@@ -1,6 +1,7 @@
 <template>
 <div>
-   <HomeTop/>
+   <HomeTop :state='count' />
+   
 </div>
 
 </template>
@@ -12,30 +13,24 @@
 <script>
 import Navbar from "../../components/Navbar.vue";
 import HomeTop from "../../components/HomeTop.vue";
-import { reactive, ref } from "vue";
+import { reactive, ref,computed} from "vue";
+import { useStore } from "vuex";
 export default {
     name:"Home",
-    setup(){
-        const  name=ref('rifki')
-
+     setup(){
+        const store = useStore();
+        const dataApi = computed((store.state.dataApi));
+        const count = computed(()=>(store.state.count));
         const handleClick = ()=>{
-            name.value='kontol'
+            store.commit('INCREMENT',count.value ++)
         }
+        console.log(dataApi)
         return{
-name,handleClick
+handleClick,count,dataApi
         }
       
     },
-    created(){
-    },
-    mounted(){
-        console.log('mounted')
-    },
-    data(){
-        return{
-            score:50
-        }
-    },
+     
     components:{
             Navbar,
             HomeTop
