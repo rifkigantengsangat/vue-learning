@@ -1,19 +1,44 @@
+<template>
+<div>
+   <HomeTop/>
+</div>
+
+</template>
+
+
+
+
+
 <script>
 import Navbar from "../../components/Navbar.vue";
-    export default{
-    name: "home",
-    data() {
-        return {
-            data: [],
-            loading: false,
-            error: false,
-            textMessage: "",
-        };
+import HomeTop from "../../components/HomeTop.vue";
+import { reactive, ref } from "vue";
+export default {
+    name:"Home",
+    setup(){
+        const  name=ref('rifki')
+
+        const handleClick = ()=>{
+            name.value='kontol'
+        }
+        return{
+name,handleClick
+        }
+      
     },
-    components: { Navbar }
+    created(){
+    },
+    mounted(){
+        console.log('mounted')
+    },
+    data(){
+        return{
+            score:50
+        }
+    },
+    components:{
+            Navbar,
+            HomeTop
+        }
 }
 </script>
-<template>
-   
-    <router-link to="/about">About</router-link>
-    </template>
